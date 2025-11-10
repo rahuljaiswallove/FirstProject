@@ -46,7 +46,30 @@ class UiController extends CI_Controller
         $this->load->view('ui/signup');
     }
 
+    // Load Reg Page
+    public function loadUIsend()
+    {
+        $this->load->view('ui/send');
+    }
 
+    // Load Start Page
+    public function loadUIStart()
+    {
+        $this->load->view('ui/start');
+    }
+
+    // Load Registration Page
+
+    public function loadUIregistration()
+    {
+        $this->load->view('ui/registration');
+    }
+
+    // Load Login Page
+    public function loadUIlogin()
+    {
+        $this->load->view('ui/login');
+    }
 
 
 
@@ -67,4 +90,44 @@ class UiController extends CI_Controller
         $this->load->model('FormModel');
         $this->FormModel->saveUserData();
     }
+
+    //Handle Send Submission
+    public function loadSendModel()
+    {
+        $this->load->model('SendModel');
+        $this->SendModel->saveSend();
+    }
+
+    // Hand Start Submission
+    public function loadStartModel()
+    {
+        $this->load->model('StartModel');
+        $this->StartModel->saveStart();
+    }
+
+    // Handle Registration Submission
+    public function loadRegistrationModel()
+    {
+        $this->load->model('RegModel');
+        $this->RegModel->SaveReg();
+    }
+
+
+    /// Login Submission
+
+    public function loadLoginModel()
+    {
+        $this->load->model('LoginModel');
+        $this->LoginModel->checkLogin();
+    }
+
+        // ===== Logout Function Call =====
+    public function loaDlogoutDashboard()
+    {
+        $this->load->model('LoginModel');
+        $this->LoginModel->logoutDashboard();
+    }
 }
+
+
+?>

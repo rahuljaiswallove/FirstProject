@@ -155,9 +155,9 @@
                                 <a class="nav-link" href="home-1.html#">Multi-Page <i class="icon-arrow-right"></i></a>
                                 <ul class="dropdown-menu">
                                     <li class="nav-item"><a href="<?php echo base_url('form'); ?>" class="nav-link">Form <span>1</span></a></li>
-                                    <li class="nav-item"><a href="home-2.html" class="nav-link">Consulting <span>2</span></a></li>
-                                    <li class="nav-item"><a href="home-3.html" class="nav-link">Consulting <span>3</span></a></li>
-                                    <li class="nav-item"><a href="home-4.html" class="nav-link">Consulting <span>4</span></a></li>
+                                    <li class="nav-item"><a href="<?php echo base_url('send'); ?>" class="nav-link">Form <span>2</span></a></li>
+                                    <li class="nav-item"><a href="<?php echo base_url('start'); ?>" class="nav-link">Form <span>3</span></a></li>
+                                    <li class="nav-item"><a href="<?php echo base_url('registration'); ?>" class="nav-link">Registratioin</span></a></li>
                                     <li class="nav-item"><a href="home-5.html" class="nav-link">Consulting <span>5</span></a></li>
                                     <li class="nav-item"><a href="home-6.html" class="nav-link">Consulting <span>6</span></a></li>
                                     <li class="nav-item"><a href="home-7.html" class="nav-link">Logistics <span>7</span></a></li>
