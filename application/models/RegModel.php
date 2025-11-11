@@ -58,7 +58,7 @@ class RegModel extends CI_Model
                             icon: "success",
                             button: "OK"
                         }).then(function() {
-                            window.location.href = "' . base_url('registration') . '";
+                            window.location.href = "' . base_url('login') . '";
                         });
                     });
                 </script>';

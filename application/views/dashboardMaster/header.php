@@ -1,9 +1,9 @@
 <?php
-// defined('BASEPATH') or exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-// if (!$this->session->userdata('activeDashboard')) {
-//     redirect(base_url('login'));
-// }
+if (!$this->session->userdata('activeDashboard')) {
+    redirect(base_url('login'));
+}
 ?>
 
 <!DOCTYPE html>

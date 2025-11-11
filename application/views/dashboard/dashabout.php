@@ -20,13 +20,13 @@
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="<?php echo base_url('logout'); ?>" class="btn btn-danger">Logout</a>
                                 </li>
-                                <li class="breadcrumb-item active" aria-current="page">HOME PAGE </li>
-                                </li>
+                                <li class="breadcrumb-item active" aria-current="page">ABOUT PAGE </li>
                             </ol>
                         </nav>
 
-                        <h1 class="mb-0 title effect-static-text">Welcome to Home Page Dashboard</h1>
-                        <a href="<?php echo base_url('dashAbout'); ?>">About</a>
+                        <h1 class="mb-0 title effect-static-text">Welcome Dashboard About Page Dashboard</h1>
+                        <a href="<?php echo base_url('welDashboard'); ?>">Home</a>
+
                     </div>
                 </div>
             </div>

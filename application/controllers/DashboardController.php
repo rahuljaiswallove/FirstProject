@@ -14,6 +14,10 @@ class DashboardController extends CI_Controller
         $this->load->view('dashboard/weldash');
     }
 
+        public function loaDdashabout()
+    {
+        $this->load->view('dashboard/dashabout');
+    }
 
 }
 

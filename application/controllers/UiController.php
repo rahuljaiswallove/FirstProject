@@ -3,10 +3,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class UiController extends CI_Controller
 {
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
     }
+
+
+
 
     //////=======  UI PAGE LOADED HERE ========////
     // Load About page
@@ -113,14 +116,6 @@ class UiController extends CI_Controller
     }
 
 
-    /// Login Submission
-
-    public function loadLoginModel()
-    {
-        $this->load->model('LoginModel');
-        $this->LoginModel->checkLogin();
-    }
-
 
         // ===== Logout Function Call =====
     public function loaDlogoutDashboard()
@@ -128,6 +123,20 @@ class UiController extends CI_Controller
         $this->load->model('LoginModel');
         $this->LoginModel->logoutDashboard();
     }
+
+
+    // ===== LOGIN HANDLER =====
+    public function loadLoginModel()
+    {
+        // Load LoginModel
+        $this->load->model('LoginModel');
+        
+        // Call model function for login check
+        $this->LoginModel->loginCred();
+    }
+
+
+
 }
 
 

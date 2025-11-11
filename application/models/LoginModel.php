@@ -7,59 +7,82 @@ class LoginModel extends CI_Model
     {
         parent::__construct();
     }
-
     // ===== LOGIN CHECK FUNCTION =====
-    public function checkLogin()
+    public function loginCred()
     {
-        if ($this->input->post('LoginBtn')) {
 
-            // Load SweetAlert JS once
-            echo '<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>';
 
-            $fieldEmail = trim($this->input->post('emailLogin', true));
-            $fieldPassword = trim($this->input->post('passwordLogin', true));
+        // Load SweetAlert JS
+        echo '<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>';
 
-            // --- Check email existence ---
-            $user = $this->db->where('email', $fieldEmail)->get('register')->row();
+        // Get input fields safely
+        $fieldEmail = trim($this->input->post('emailLogin', true));
+        $fieldPassword = trim($this->input->post('passwordLogin', true));
 
-            // --- Email Not Found ---
-            if (!$user) {
-                $this->sweetAlertRedirect(
-                    'Email Not Registered!',
-                    'Please sign up first.',
-                    'error',
-                    'login'
-                );
-                return;
-            }
+        // Validate empty fields
+        if (empty($fieldEmail) || empty($fieldPassword)) {
+            $this->sweetAlertRedirect(
+                'Missing Information!',
+                'Please enter both email and password.',
+                'warning',
+                'login'
+            );
+            return;
+        }
 
-            // --- Password Verify ---
-            if (password_verify($fieldPassword, $user->password)) {
-                // ✅ Set session
-                $this->session->set_userdata('activeDashboard', $user->email);
+        // Check if email exists
+        $user = $this->db->where('email', $fieldEmail)->get('register')->row();
 
-                $this->sweetAlertRedirect(
-                    'Login Successful!',
-                    'Welcome back!',
-                    'success',
-                    'welDashboard'
-                );
-            } else {
-                // ❌ Wrong Password
-                $this->sweetAlertRedirect(
-                    'Invalid Password!',
-                    'Please try again.',
-                    'error',
-                    'login'
-                );
-            }
+        if (!$user || empty($user->email)) {
+            $this->sweetAlertRedirect(
+                'Email Not Found!',
+                'No account exists with this email. Please sign up first.',
+                'error',
+                'login'
+            );
+            return;
+        }
+
+        // Verify password (hashed)
+        if (password_verify($fieldPassword, $user->password)) {
+
+            // Create session
+            $this->session->set_userdata([
+                'activeDashboard' => true,
+                'user_email' => $user->email,
+                'user_name' => $user->first_name
+            ]);
+
+            // Success redirect
+            $this->sweetAlertRedirect(
+                'Login Successful!',
+                'Welcome back, ' . ucfirst($user->first_name ?? 'User') . '!',
+                'success',
+                'welDashboard'
+            );
+        } else {
+            // Wrong password
+            $this->sweetAlertRedirect(
+                'Invalid Password!',
+                'Please enter the correct password.',
+                'error',
+                'login'
+            );
         }
     }
+
+
+
+
+
+
+
+
+
 
     // ===== LOGOUT FUNCTION =====
     public function logoutDashboard()
     {
-        // Load SweetAlert JS once
         echo '<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>';
 
         // Destroy session
@@ -75,7 +98,7 @@ class LoginModel extends CI_Model
         );
     }
 
-    // ===== SWEETALERT HELPER FUNCTION (only title, text, icon) =====
+    // ===== SWEETALERT HELPER FUNCTION =====
     private function sweetAlertRedirect($title, $text, $icon, $redirectPage)
     {
         echo "
@@ -92,16 +115,4 @@ class LoginModel extends CI_Model
         </script>
         ";
     }
-
-
-
-
-
 }
-
-
-
-
-
-
-?>

@@ -76,9 +76,12 @@ $route['submit'] = 'UiController/loadRegistrationModel';
 
 //// Dashboard page DashboardController 
 $route['welDashboard'] = 'DashboardController/loadDashboarddashboard';
+$route['dashAbout'] = 'DashboardController/loaDdashabout';
+
 
 /// uicontroller function name  routing here for Login Model
 $route['verifyChecking'] = 'UiController/loadLoginModel';
+
 
 
 // routeing for uicontroller function name for login model 
