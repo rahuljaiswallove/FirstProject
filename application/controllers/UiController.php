@@ -121,6 +121,7 @@ class UiController extends CI_Controller
         $this->LoginModel->checkLogin();
     }
 
+
         // ===== Logout Function Call =====
     public function loaDlogoutDashboard()
     {

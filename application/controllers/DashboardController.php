@@ -11,8 +11,11 @@ class DashboardController extends CI_Controller
     // ===== Dashboard Page Load =====
     public function loadDashboarddashboard()
     {
-        $this->load->view('/dashboard/dshhome');
+        $this->load->view('dashboard/weldash');
     }
 
 
 }
+
+
+?>

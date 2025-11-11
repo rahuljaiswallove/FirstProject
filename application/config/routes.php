@@ -69,20 +69,23 @@ $route['SecondPortal'] = 'UiController/loadStartModel';
 /// ui page routing here Registration Model
 $route['submit'] = 'UiController/loadRegistrationModel';
 
-/// ui page routing here Login Model
-$route['verifyChecking'] = 'LoginController/loadLoginModel';
+
+
+
 
 
 //// Dashboard page DashboardController 
-$route['dashBoard'] = 'DashboardController/loadDashboarddashboard';
+$route['welDashboard'] = 'DashboardController/loadDashboarddashboard';
 
-//loaDlogoutDashboard routeing here 
+/// uicontroller function name  routing here for Login Model
+$route['verifyChecking'] = 'UiController/loadLoginModel';
+
+
+// routeing for uicontroller function name for login model 
 $route['logout'] = 'UiController/loaDlogoutDashboard';
 
 
 
 
 
-
 ?>
-

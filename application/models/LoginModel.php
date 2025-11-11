@@ -13,53 +13,45 @@ class LoginModel extends CI_Model
     {
         if ($this->input->post('LoginBtn')) {
 
+            // Load SweetAlert JS once
             echo '<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>';
 
             $fieldEmail = trim($this->input->post('emailLogin', true));
             $fieldPassword = trim($this->input->post('passwordLogin', true));
 
+            // --- Check email existence ---
             $user = $this->db->where('email', $fieldEmail)->get('register')->row();
 
             // --- Email Not Found ---
             if (!$user) {
-                echo '<script>
-                    swal({
-                        title: "Email Not Registered!",
-                        text: "Please sign up first.",
-                        icon: "error"
-                    }).then(function() {
-                        window.location.href = "' . base_url('login') . '";
-                    });
-                </script>';
+                $this->sweetAlertRedirect(
+                    'Email Not Registered!',
+                    'Please sign up first.',
+                    'error',
+                    'login'
+                );
                 return;
             }
 
             // --- Password Verify ---
             if (password_verify($fieldPassword, $user->password)) {
-
-                // ✅ SET SESSION (only email)
+                // ✅ Set session
                 $this->session->set_userdata('activeDashboard', $user->email);
 
-                echo '<script>
-                    swal({
-                        title: "Login Successful!",
-                        text: "Welcome back!",
-                        icon: "success"
-                    }).then(function() {
-                        window.location.href = "' . base_url('dashBoard') . '";
-                    });
-                </script>';
+                $this->sweetAlertRedirect(
+                    'Login Successful!',
+                    'Welcome back!',
+                    'success',
+                    'welDashboard'
+                );
             } else {
                 // ❌ Wrong Password
-                echo '<script>
-                    swal({
-                        title: "Invalid Password!",
-                        text: "Please try again.",
-                        icon: "error"
-                    }).then(function() {
-                        window.location.href = "' . base_url('login') . '";
-                    });
-                </script>';
+                $this->sweetAlertRedirect(
+                    'Invalid Password!',
+                    'Please try again.',
+                    'error',
+                    'login'
+                );
             }
         }
     }
@@ -67,23 +59,49 @@ class LoginModel extends CI_Model
     // ===== LOGOUT FUNCTION =====
     public function logoutDashboard()
     {
+        // Load SweetAlert JS once
+        echo '<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>';
+
         // Destroy session
         $this->session->unset_userdata('activeDashboard');
         $this->session->sess_destroy();
 
-        // SweetAlert logout message
-        echo '<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>';
-        echo '<script>
-            swal({
-                title: "Logged Out!",
-                text: "You have successfully logged out.",
-                icon: "success"
-            }).then(function() {
-                window.location.href = "' . base_url('login') . '";
-            });
-        </script>';
+        // ✅ Show logout alert and redirect
+        $this->sweetAlertRedirect(
+            'Logged Out Successfully!',
+            'You have been logged out of your account.',
+            'success',
+            'login'
+        );
     }
+
+    // ===== SWEETALERT HELPER FUNCTION (only title, text, icon) =====
+    private function sweetAlertRedirect($title, $text, $icon, $redirectPage)
+    {
+        echo "
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                swal({
+                    title: '$title',
+                    text: '$text',
+                    icon: '$icon'
+                }).then(function() {
+                    window.location.href = '" . base_url($redirectPage) . "';
+                });
+            });
+        </script>
+        ";
+    }
+
+
+
+
+
 }
+
+
+
+
 
 
 ?>
